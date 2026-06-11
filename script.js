@@ -251,21 +251,7 @@ function setupAnimations() {
   fadeElements.forEach(el => observer.observe(el));
 }
 
-// Parallax Effect for Hero Section
-const heroSection = document.querySelector('.hero');
-if (heroSection) {
-  let isScrollingHero = false;
-  window.addEventListener('scroll', () => {
-    if (!isScrollingHero) {
-      window.requestAnimationFrame(() => {
-        let scrollPosition = window.pageYOffset;
-        heroSection.style.backgroundPositionY = (scrollPosition * 0.4) + 'px';
-        isScrollingHero = false;
-      });
-      isScrollingHero = true;
-    }
-  });
-}
+// Parallax background scroll listener removed to improve page responsiveness and fix scroll stuttering.
 
 // Shop Filtering & Sorting
 function setupShopFilters() {

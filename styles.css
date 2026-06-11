@@ -46,10 +46,8 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
-  /* Richer leather texture overlay using noise and dark gradient */
-  background-image: 
-    linear-gradient(rgba(31, 26, 23, 0.95), rgba(44, 36, 30, 0.95)),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  /* Premium dark leather gradient for instant GPU render */
+  background-image: linear-gradient(135deg, #181412 0%, #221a15 50%, #2a201a 100%);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -768,6 +766,7 @@ img {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
 }
 
 .fade-in.visible, .fade-in.active {
@@ -778,19 +777,22 @@ img {
 .reveal-up {
   opacity: 0;
   transform: translateY(50px);
-  transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
 }
 
 .reveal-left {
   opacity: 0;
   transform: translateX(-50px);
-  transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
 }
 
 .reveal-right {
   opacity: 0;
   transform: translateX(50px);
-  transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
 }
 
 .reveal-up.active, .reveal-left.active, .reveal-right.active {
