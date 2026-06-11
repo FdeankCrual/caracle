@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCartUI();
   setupEventListeners();
   setupAnimations();
+  setupShopFilters();
 });
 
 function setupEventListeners() {
@@ -41,13 +42,27 @@ function setupEventListeners() {
   
   if (mobileMenuBtn && navLinks) {
     mobileMenuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('active-menu');
+      const isOpen = navLinks.classList.toggle('active-menu');
+      mobileMenuBtn.innerHTML = isOpen ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+      if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
+      }
     });
 
     // Close menu when clicking a link
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('active-menu');
+        document.body.style.overflow = '';
+        mobileMenuBtn.innerHTML = '<i data-lucide="menu"></i>';
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
+          lucide.createIcons();
+        }
       });
     });
   }
@@ -56,11 +71,12 @@ function setupEventListeners() {
   const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
   addToCartBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      const productCard = e.target.closest('.product-card');
-      const id = productCard.dataset.id;
-      const title = productCard.dataset.title;
-      const price = parseFloat(productCard.dataset.price);
-      const img = productCard.dataset.img;
+      const container = e.target.closest('[data-id]');
+      if (!container) return;
+      const id = container.dataset.id;
+      const title = container.dataset.title;
+      const price = parseFloat(container.dataset.price);
+      const img = container.dataset.img;
       
       addToCart({ id, title, price, img });
       
@@ -84,11 +100,38 @@ function setupEventListeners() {
   // Navbar scroll effect
   const navbar = document.querySelector('.navbar');
   if (navbar) {
+    let isScrollingNav = false;
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+      if (!isScrollingNav) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+          isScrollingNav = false;
+        });
+        isScrollingNav = true;
+      }
+    });
+  }
+
+  // Masterpieces carousel scroll track sync
+  const categoryGrid = document.querySelector('.category-grid');
+  const categoryScrollThumb = document.getElementById('categoryScrollThumb');
+  if (categoryGrid && categoryScrollThumb) {
+    let isScrollingCarousel = false;
+    categoryGrid.addEventListener('scroll', () => {
+      if (!isScrollingCarousel) {
+        window.requestAnimationFrame(() => {
+          const maxScroll = categoryGrid.scrollWidth - categoryGrid.clientWidth;
+          if (maxScroll > 0) {
+            const scrollPct = categoryGrid.scrollLeft / maxScroll;
+            categoryScrollThumb.style.left = `${scrollPct * 60}px`;
+          }
+          isScrollingCarousel = false;
+        });
+        isScrollingCarousel = true;
       }
     });
   }
@@ -209,10 +252,98 @@ function setupAnimations() {
 }
 
 // Parallax Effect for Hero Section
-window.addEventListener('scroll', () => {
-  const hero = document.querySelector('.hero');
-  if (hero) {
-    let scrollPosition = window.pageYOffset;
-    hero.style.backgroundPositionY = (scrollPosition * 0.4) + 'px';
+const heroSection = document.querySelector('.hero');
+if (heroSection) {
+  let isScrollingHero = false;
+  window.addEventListener('scroll', () => {
+    if (!isScrollingHero) {
+      window.requestAnimationFrame(() => {
+        let scrollPosition = window.pageYOffset;
+        heroSection.style.backgroundPositionY = (scrollPosition * 0.4) + 'px';
+        isScrollingHero = false;
+      });
+      isScrollingHero = true;
+    }
+  });
+}
+
+// Shop Filtering & Sorting
+function setupShopFilters() {
+  const searchInput = document.getElementById('searchInput');
+  const sortSelect = document.getElementById('sortSelect');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const productGrid = document.getElementById('productGrid');
+  
+  if (!productGrid) return; // Exit if not on shop page
+  
+  const initialCards = Array.from(productGrid.querySelectorAll('.product-card'));
+  // Cache original index
+  const cachedCards = initialCards.map((card, idx) => ({
+    card,
+    idx,
+    title: card.dataset.title ? card.dataset.title.toLowerCase() : card.querySelector('.product-title').textContent.toLowerCase(),
+    category: card.querySelector('.product-category').textContent.toLowerCase(),
+    price: parseFloat(card.dataset.price || 0)
+  }));
+  
+  let currentCategory = 'all';
+  let searchQuery = '';
+  let currentSort = 'default';
+  
+  function applyFilters() {
+    let matches = cachedCards.filter(item => {
+      const matchesSearch = item.title.includes(searchQuery) || item.category.includes(searchQuery);
+      const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
+      const isVisible = matchesSearch && matchesCategory;
+      
+      item.card.style.display = isVisible ? '' : 'none';
+      return isVisible;
+    });
+    
+    // Sort matching ones
+    if (currentSort === 'low-to-high') {
+      matches.sort((a, b) => a.price - b.price);
+    } else if (currentSort === 'high-to-low') {
+      matches.sort((a, b) => b.price - a.price);
+    } else {
+      matches.sort((a, b) => a.idx - b.idx);
+    }
+    
+    // Re-append nodes in the sorted order
+    matches.forEach(item => {
+      productGrid.appendChild(item.card);
+    });
+    
+    // Trigger scroll animations for remaining visible items
+    if (typeof setupAnimations === 'function') {
+      setupAnimations();
+    }
   }
-});
+  
+  // Search listener
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      applyFilters();
+    });
+  }
+  
+  // Sort selector listener
+  if (sortSelect) {
+    sortSelect.addEventListener('change', (e) => {
+      currentSort = e.target.value;
+      applyFilters();
+    });
+  }
+  
+  // Category filter buttons listeners
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCategory = btn.dataset.category.toLowerCase().trim();
+      applyFilters();
+    });
+  });
+}
+

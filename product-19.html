@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Honey Tan Leather Travel Duffle Bag | Caracal Bharat</title>
+    <meta name="description" content="Travel in premium style whether heading to the gym or embarking on a weekend road trip. This classic barrel-shaped duffle bag offers a rich tan finish, sturdy brass zippers, and dual exterior pockets to keep your passport, tickets, and devices close at hand.">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="./caracle.png" alt="Caracal Bharat Logo">
+                Caracal Bharat
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html" class="active">Shop</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="nav-icons">
+                <div class="cart-icon cart-toggle">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Overlay & Sidebar (same as index) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart"><i data-lucide="x"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cartTotal">₹0.00</span>
+            </div>
+            <button class="btn btn-primary checkout-btn" id="checkoutBtn">
+                <i data-lucide="message-circle"></i> Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="product-detail-section">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs fade-in">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="shop.html">Shop</a>
+                <span class="separator">/</span>
+                <span class="current">Premium Honey Tan Leather Travel Duffle Bag</span>
+            </div>
+
+            <!-- Product Container -->
+            <div class="product-detail-container fade-in" data-id="p19" data-title="Premium Honey Tan Leather Travel Duffle Bag" data-price="5200" data-img="products/19.png">
+                <!-- Left: Image -->
+                <div class="product-detail-image-wrapper">
+                    <img src="products/19.png" alt="Premium Honey Tan Leather Travel Duffle Bag" class="product-detail-image">
+                </div>
+
+                <!-- Right: Content -->
+                <div class="product-detail-info">
+                    <span class="product-detail-category">Duffle & Gym</span>
+                    <h1 class="product-detail-title">Premium Honey Tan Leather Travel Duffle Bag</h1>
+                    <div class="product-detail-price">₹5,200</div>
+                    
+                    <button class="btn btn-primary add-to-cart-btn">
+                        <i data-lucide="shopping-cart" size="18"></i> Add to Cart
+                    </button>
+
+                    <div class="product-detail-divider"></div>
+
+                    <h2 class="product-detail-section-title">Description</h2>
+                    <p class="product-detail-description">Travel in premium style whether heading to the gym or embarking on a weekend road trip. This classic barrel-shaped duffle bag offers a rich tan finish, sturdy brass zippers, and dual exterior pockets to keep your passport, tickets, and devices close at hand.</p>
+
+                    <h2 class="product-detail-section-title">Key Features</h2>
+                    <ul class="product-features-list">
+                        <li>Smooth, buttery pull-up tan leather finish</li>
+                        <li>Reinforced dual top handles & modular side D-rings</li>
+                        <li>Front and side exterior quick-access zip pockets</li>
+                        <li>Spacious interior with dedicated utility slots</li>
+                    </ul>
+
+                    <a href="shop.html" class="back-to-shop-link">
+                        <i data-lucide="arrow-left" size="18"></i> Back to Collection
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Caracal Bharat</h3>
+                    <p>Manufacturer, trader, and exporter of premium leather goods. Elevating everyday carry with unmatched craftsmanship.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop Collection</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Get In Touch</h4>
+                    <p><i data-lucide="map-pin"></i> Takshal Enterprises, 2nd floor, Octroi post, Fatehpura- Bedla Road, Udaipur-313001</p>
+                    <p><i data-lucide="phone"></i> +91 89491 92672</p>
+                    <p><i data-lucide="mail"></i> info@caracalbharat.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Caracal Bharat. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918949192672" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <i data-lucide="message-circle"></i>
+    </a>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

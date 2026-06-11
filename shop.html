@@ -11,7 +11,7 @@
         .page-header {
             padding: 10rem 0 5rem;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.9), var(--bg-primary)), url('https://images.unsplash.com/photo-1614174124233-a3b04169722b?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.9), var(--bg-primary)), url('https://images.unsplash.com/photo-1614174124233-a3b04169722b?q=70&w=1200&auto=format&fit=crop') no-repeat center center/cover;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -34,7 +34,7 @@
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 2.5rem;
         }
 
@@ -55,7 +55,7 @@
 
         .product-image {
             width: 100%;
-            height: 300px;
+            aspect-ratio: 491 / 300;
             object-fit: cover;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
@@ -92,6 +92,69 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 6.5rem 0 3rem;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .page-subtitle {
+                font-size: 0.95rem;
+                padding: 0 1rem;
+            }
+
+            .shop-container {
+                padding: 1.5rem 0;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .product-image {
+                height: auto;
+            }
+
+            .product-info {
+                padding: 0.75rem;
+            }
+
+            .product-category {
+                font-size: 0.7rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .product-title {
+                font-size: 0.95rem;
+                margin-bottom: 0.25rem;
+                line-height: 1.3;
+                height: 2.6rem;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+
+            .product-description {
+                display: none; /* Hide descriptions in 2-column mobile grid for premium retail feel */
+            }
+
+            .product-price {
+                font-size: 1rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .add-to-cart-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.75rem;
+                letter-spacing: 0.5px;
+            }
         }
     </style>
 </head>
@@ -148,83 +211,346 @@
         </div>
     </header>
 
+    <!-- Filters and Search Section -->
+    <section class="filters-section container fade-in">
+        <div class="filters-wrapper">
+            <!-- Search Box -->
+            <div class="search-box">
+                <i data-lucide="search"></i>
+                <input type="text" id="searchInput" placeholder="Search collection...">
+            </div>
+            
+            <!-- Category Filter Row -->
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="backpack">Backpacks</button>
+                <button class="filter-btn" data-category="laptop bags">Laptop Bags</button>
+                <button class="filter-btn" data-category="ladies purse">Ladies Purses</button>
+                <button class="filter-btn" data-category="duffle & gym">Duffle & Gym</button>
+            </div>
+            
+            <!-- Sort Selector -->
+            <div class="sort-box">
+                <select id="sortSelect" aria-label="Sort products">
+                    <option value="default">Default Sorting</option>
+                    <option value="low-to-high">Price: Low to High</option>
+                    <option value="high-to-low">Price: High to Low</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
     <!-- Shop Content -->
     <section class="shop-container container">
-        <div class="product-grid" id="productGrid">
-            
+        <div class="product-grid" id="productGrid">            
             <!-- Product 1 -->
-            <div class="product-card fade-in" data-id="p1" data-title="Executive Laptop Briefcase" data-price="4500" data-img="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=600&auto=format&fit=crop" alt="Laptop Bag" class="product-image">
+            <div class="product-card fade-in" data-id="p1" data-title="Minimalist Daily Leather Backpack" data-price="3800" data-img="products/1.png">
+                <img src="products/1.png" alt="Minimalist Daily Leather Backpack" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Laptop Bags</span>
-                    <h3 class="product-title">Executive Briefcase</h3>
-                    <p class="product-description">A sleek, premium leather briefcase designed for the modern professional. Features padded compartments and antique brass hardware.</p>
-                    <div class="product-price">₹4,500.00</div>
-                    <button class="btn btn-outline add-to-cart-btn"><i data-lucide="shopping-cart" size="18"></i> Add to Cart</button>
+                    <span class="product-category">Backpack</span>
+                    <h3 class="product-title">Minimalist Daily Leather Backpack</h3>
+                    <div class="product-price">₹3,800.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-1.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
             <!-- Product 2 -->
-            <div class="product-card fade-in" data-id="p2" data-title="Signature Ladies Tote" data-price="3200" data-img="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=600&auto=format&fit=crop" alt="Ladies Purse" class="product-image">
+            <div class="product-card fade-in" data-id="p2" data-title="Classic Croco-Embossed Laptop Briefcase" data-price="4500" data-img="products/2.png">
+                <img src="products/2.png" alt="Classic Croco-Embossed Laptop Briefcase" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Ladies Purse</span>
-                    <h3 class="product-title">Signature Tote</h3>
-                    <p class="product-description">Elegant and spacious, this tote bag combines timeless style with everyday practicality. Crafted from supple saddle brown leather.</p>
-                    <div class="product-price">₹3,200.00</div>
-                    <button class="btn btn-outline add-to-cart-btn"><i data-lucide="shopping-cart" size="18"></i> Add to Cart</button>
+                    <span class="product-category">Laptop Bags</span>
+                    <h3 class="product-title">Classic Croco-Embossed Laptop Briefcase</h3>
+                    <div class="product-price">₹4,500.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-2.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
             <!-- Product 3 -->
-            <div class="product-card fade-in" data-id="p3" data-title="Vintage Leather Backpack" data-price="3800" data-img="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?q=80&w=600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?q=80&w=600&auto=format&fit=crop" alt="Backpack" class="product-image">
+            <div class="product-card fade-in" data-id="p3" data-title="Elegant Dual-Tone Croco Leather Tote" data-price="3200" data-img="products/3.png">
+                <img src="products/3.png" alt="Elegant Dual-Tone Croco Leather Tote" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Backpack</span>
-                    <h3 class="product-title">Vintage Explorer</h3>
-                    <p class="product-description">Rugged durability meets artisan craftsmanship. This backpack is your perfect companion for both urban commutes and weekend getaways.</p>
-                    <div class="product-price">₹3,800.00</div>
-                    <button class="btn btn-outline add-to-cart-btn"><i data-lucide="shopping-cart" size="18"></i> Add to Cart</button>
+                    <span class="product-category">Ladies Purse</span>
+                    <h3 class="product-title">Elegant Dual-Tone Croco Leather Tote</h3>
+                    <div class="product-price">₹3,200.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-3.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
             <!-- Product 4 -->
-            <div class="product-card fade-in" data-id="p4" data-title="Premium Gym Duffle" data-price="5000" data-img="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?q=80&w=600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?q=80&w=600&auto=format&fit=crop" alt="Duffle Bag" class="product-image">
+            <div class="product-card fade-in" data-id="p4" data-title="Compact Leather Crossbody Sling Bag" data-price="2200" data-img="products/4.png">
+                <img src="products/4.png" alt="Compact Leather Crossbody Sling Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Duffle & Gym</span>
-                    <h3 class="product-title">Premium Weekender</h3>
-                    <p class="product-description">A robust, high-capacity duffle bag featuring reinforced stitching and heavy-duty bronze zippers. Built to last a lifetime.</p>
-                    <div class="product-price">₹5,000.00</div>
-                    <button class="btn btn-outline add-to-cart-btn"><i data-lucide="shopping-cart" size="18"></i> Add to Cart</button>
+                    <span class="product-category">Ladies Purse</span>
+                    <h3 class="product-title">Compact Leather Crossbody Sling Bag</h3>
+                    <div class="product-price">₹2,200.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-4.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
-             <!-- Product 5 -->
-             <div class="product-card fade-in" data-id="p5" data-title="Minimalist Laptop Sleeve" data-price="1800" data-img="https://images.unsplash.com/photo-1601524348505-8e7c2e8bd0d0?q=80&w=600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1601524348505-8e7c2e8bd0d0?q=80&w=600&auto=format&fit=crop" alt="Laptop Sleeve" class="product-image">
+            <!-- Product 5 -->
+            <div class="product-card fade-in" data-id="p5" data-title="Executive Slim Leather Laptop Bag" data-price="4200" data-img="products/5.png">
+                <img src="products/5.png" alt="Executive Slim Leather Laptop Bag" class="product-image">
                 <div class="product-info">
                     <span class="product-category">Laptop Bags</span>
-                    <h3 class="product-title">Minimalist Sleeve</h3>
-                    <p class="product-description">Protect your technology with this ultra-slim, soft-lined leather sleeve. The epitome of understated elegance.</p>
-                    <div class="product-price">₹1,800.00</div>
-                    <button class="btn btn-outline add-to-cart-btn"><i data-lucide="shopping-cart" size="18"></i> Add to Cart</button>
+                    <h3 class="product-title">Executive Slim Leather Laptop Bag</h3>
+                    <div class="product-price">₹4,200.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-5.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
             <!-- Product 6 -->
-            <div class="product-card fade-in" data-id="p6" data-title="Classic Evening Clutch" data-price="2500" data-img="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=600&auto=format&fit=crop" alt="Ladies Clutch" class="product-image">
+            <div class="product-card fade-in" data-id="p6" data-title="Multi-Compartment Textured Leather Clutch Wallet" data-price="1800" data-img="products/6.png">
+                <img src="products/6.png" alt="Multi-Compartment Textured Leather Clutch Wallet" class="product-image">
                 <div class="product-info">
                     <span class="product-category">Ladies Purse</span>
-                    <h3 class="product-title">Classic Evening Clutch</h3>
-                    <p class="product-description">A sophisticated accessory for your evenings out. Crafted with a unique metallic-finish leather to make you stand out.</p>
-                    <div class="product-price">₹2,500.00</div>
-                    <button class="btn btn-outline add-to-cart-btn"><i data-lucide="shopping-cart" size="18"></i> Add to Cart</button>
+                    <h3 class="product-title">Multi-Compartment Textured Leather Clutch Wallet</h3>
+                    <div class="product-price">₹1,800.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-6.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
-        </div>
+            <!-- Product 7 -->
+            <div class="product-card fade-in" data-id="p7" data-title="Deep Forest Green Oiled Leather Messenger Bag" data-price="3900" data-img="products/7.png">
+                <img src="products/7.png" alt="Deep Forest Green Oiled Leather Messenger Bag" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Laptop Bags</span>
+                    <h3 class="product-title">Deep Forest Green Oiled Leather Messenger Bag</h3>
+                    <div class="product-price">₹3,900.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-7.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card fade-in" data-id="p8" data-title="Premium Croco-Embossed Top-Handle Satchel" data-price="3500" data-img="products/8.png">
+                <img src="products/8.png" alt="Premium Croco-Embossed Top-Handle Satchel" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Ladies Purse</span>
+                    <h3 class="product-title">Premium Croco-Embossed Top-Handle Satchel</h3>
+                    <div class="product-price">₹3,500.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-8.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 9 -->
+            <div class="product-card fade-in" data-id="p9" data-title="Premium Laser-Cut Cylinder Crossbody Bag" data-price="3600" data-img="products/9.png">
+                <img src="products/9.png" alt="Premium Laser-Cut Cylinder Crossbody Bag" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Ladies Purse</span>
+                    <h3 class="product-title">Premium Laser-Cut Cylinder Crossbody Bag</h3>
+                    <div class="product-price">₹3,600.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-9.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 10 -->
+            <div class="product-card fade-in" data-id="p10" data-title="Modern Tailored Leather Zipper Tote" data-price="3400" data-img="products/10.png">
+                <img src="products/10.png" alt="Modern Tailored Leather Zipper Tote" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Ladies Purse</span>
+                    <h3 class="product-title">Modern Tailored Leather Zipper Tote</h3>
+                    <div class="product-price">₹3,400.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-10.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 11 -->
+            <div class="product-card fade-in" data-id="p11" data-title="Premium Slate Blue Distressed Leather Messenger Bag" data-price="4000" data-img="products/11.png">
+                <img src="products/11.png" alt="Premium Slate Blue Distressed Leather Messenger Bag" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Laptop Bags</span>
+                    <h3 class="product-title">Premium Slate Blue Distressed Leather Messenger Bag</h3>
+                    <div class="product-price">₹4,000.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-11.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 12 -->
+            <div class="product-card fade-in" data-id="p12" data-title="Rugged Multi-Pocket Distressed Leather Backpack" data-price="4200" data-img="products/12.png">
+                <img src="products/12.png" alt="Rugged Multi-Pocket Distressed Leather Backpack" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Backpack</span>
+                    <h3 class="product-title">Rugged Multi-Pocket Distressed Leather Backpack</h3>
+                    <div class="product-price">₹4,200.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-12.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 13 -->
+            <div class="product-card fade-in" data-id="p13" data-title="Artisan Laser-Tooled Leather Briefcase Messenger" data-price="4600" data-img="products/13.png">
+                <img src="products/13.png" alt="Artisan Laser-Tooled Leather Briefcase Messenger" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Laptop Bags</span>
+                    <h3 class="product-title">Artisan Laser-Tooled Leather Briefcase Messenger</h3>
+                    <div class="product-price">₹4,600.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-13.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 14 -->
+            <div class="product-card fade-in" data-id="p14" data-title="Handcrafted Olive Green Croco-Accent Satchel" data-price="3800" data-img="products/14.png">
+                <img src="products/14.png" alt="Handcrafted Olive Green Croco-Accent Satchel" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Ladies Purse</span>
+                    <h3 class="product-title">Handcrafted Olive Green Croco-Accent Satchel</h3>
+                    <div class="product-price">₹3,800.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-14.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 15 -->
+            <div class="product-card fade-in" data-id="p15" data-title="Classic Grained Leather Dome Backpack" data-price="3600" data-img="products/15.png">
+                <img src="products/15.png" alt="Classic Grained Leather Dome Backpack" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Backpack</span>
+                    <h3 class="product-title">Classic Grained Leather Dome Backpack</h3>
+                    <div class="product-price">₹3,600.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-15.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 16 -->
+            <div class="product-card fade-in" data-id="p16" data-title="Executive Croco-Patterned Leather Briefcase" data-price="4800" data-img="products/16.png">
+                <img src="products/16.png" alt="Executive Croco-Patterned Leather Briefcase" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Laptop Bags</span>
+                    <h3 class="product-title">Executive Croco-Patterned Leather Briefcase</h3>
+                    <div class="product-price">₹4,800.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-16.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 17 -->
+            <div class="product-card fade-in" data-id="p17" data-title="The &quot;Chronicle&quot; Distressed Leather Drawstring Backpack" data-price="3900" data-img="products/17.png">
+                <img src="products/17.png" alt="The "Chronicle" Distressed Leather Drawstring Backpack" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Backpack</span>
+                    <h3 class="product-title">The "Chronicle" Distressed Leather Drawstring Backpack</h3>
+                    <div class="product-price">₹3,900.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-17.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 18 -->
+            <div class="product-card fade-in" data-id="p18" data-title="The &quot;Pebbled Luna&quot; Wooden-Handle Crescent Tote" data-price="3500" data-img="products/18.png">
+                <img src="products/18.png" alt="The "Pebbled Luna" Wooden-Handle Crescent Tote" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Ladies Purse</span>
+                    <h3 class="product-title">The "Pebbled Luna" Wooden-Handle Crescent Tote</h3>
+                    <div class="product-price">₹3,500.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-18.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 19 -->
+            <div class="product-card fade-in" data-id="p19" data-title="Premium Honey Tan Leather Travel Duffle Bag" data-price="5200" data-img="products/19.png">
+                <img src="products/19.png" alt="Premium Honey Tan Leather Travel Duffle Bag" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Duffle & Gym</span>
+                    <h3 class="product-title">Premium Honey Tan Leather Travel Duffle Bag</h3>
+                    <div class="product-price">₹5,200.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-19.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 20 -->
+            <div class="product-card fade-in" data-id="p20" data-title="Handcrafted Triple-Gusset Croco Crossbody Bag" data-price="2800" data-img="products/20.png">
+                <img src="products/20.png" alt="Handcrafted Triple-Gusset Croco Crossbody Bag" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Ladies Purse</span>
+                    <h3 class="product-title">Handcrafted Triple-Gusset Croco Crossbody Bag</h3>
+                    <div class="product-price">₹2,800.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-20.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 21 -->
+            <div class="product-card fade-in" data-id="p21" data-title="Vintage Green Full-Grain Oiled Leather Backpack" data-price="4400" data-img="products/21.png">
+                <img src="products/21.png" alt="Vintage Green Full-Grain Oiled Leather Backpack" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Backpack</span>
+                    <h3 class="product-title">Vintage Green Full-Grain Oiled Leather Backpack</h3>
+                    <div class="product-price">₹4,400.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-21.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 22 -->
+            <div class="product-card fade-in" data-id="p22" data-title="Asymmetrical Croco-Embossed Leather Messenger Bag" data-price="3200" data-img="products/22.png">
+                <img src="products/22.png" alt="Asymmetrical Croco-Embossed Leather Messenger Bag" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Laptop Bags</span>
+                    <h3 class="product-title">Asymmetrical Croco-Embossed Leather Messenger Bag</h3>
+                    <div class="product-price">₹3,200.00</div>
+                    <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                        <a href="product-22.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase;">Info</a>
+                        <button class="btn btn-primary add-to-cart-btn" style="flex: 1.5; padding: 0.6rem 0.5rem; font-size: 0.8rem; display: flex; justify-content: center; align-items: center; text-transform: uppercase; gap: 4px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+</div>
     </section>
 
     <!-- Footer -->
@@ -255,6 +581,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918949192672" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <i data-lucide="message-circle"></i>
+    </a>
 
     <script src="script.js"></script>
     <script>

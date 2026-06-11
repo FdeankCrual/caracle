@@ -11,7 +11,7 @@
         .contact-header {
             padding: 10rem 0 5rem;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.9), var(--bg-primary)), url('https://images.unsplash.com/photo-1512413914561-ad4c3da19f2a?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.9), var(--bg-primary)), url('https://images.unsplash.com/photo-1512413914561-ad4c3da19f2a?q=70&w=1200&auto=format&fit=crop') no-repeat center center/cover;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -118,8 +118,36 @@
         }
 
         @media (max-width: 768px) {
+            .contact-header {
+                padding: 6.5rem 0 3rem;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
             .contact-container {
+                padding: 2.5rem 0;
                 grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-info-card, .contact-form-container {
+                padding: 1.5rem;
+            }
+
+            .contact-info-card h2, .contact-form-container h2 {
+                font-size: 1.6rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .info-item {
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .info-icon {
+                padding: 0.75rem;
             }
         }
     </style>
@@ -281,6 +309,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918949192672" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <i data-lucide="message-circle"></i>
+    </a>
 
     <script src="script.js"></script>
     <script>
