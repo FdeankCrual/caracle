@@ -1342,12 +1342,12 @@ img {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
 }
 
 @media (max-width: 991px) {
@@ -1398,7 +1398,7 @@ img {
   padding: 0.75rem 1rem 0.75rem 2.5rem;
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
-  border-radius: 4px;
+  border-radius: 2px;
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 0.95rem;
@@ -1440,7 +1440,7 @@ img {
   padding: 0.6rem 1.2rem;
   background: transparent;
   border: 1px solid rgba(197, 160, 89, 0.3);
-  border-radius: 4px;
+  border-radius: 2px;
   color: var(--text-secondary);
   font-family: var(--font-body);
   font-weight: 500;
@@ -1478,7 +1478,7 @@ img {
   padding: 0.75rem 1.5rem;
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
-  border-radius: 4px;
+  border-radius: 2px;
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 0.9rem;
