@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,23 +43,23 @@
             background: var(--bg-secondary);
             border-radius: 4px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.03);
+            border: 1px solid rgba(255, 255, 255, 0.03);
             transition: all var(--transition-normal);
             position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .product-card:hover {
             border-color: rgba(197, 160, 89, 0.45);
             transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
         }
 
         .product-image {
             width: 100%;
             aspect-ratio: 491 / 300;
             object-fit: cover;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .product-info {
@@ -188,7 +189,8 @@
             }
 
             .product-description {
-                display: none; /* Hide descriptions in 2-column mobile grid for premium retail feel */
+                display: none;
+                /* Hide descriptions in 2-column mobile grid for premium retail feel */
             }
 
             .product-price {
@@ -208,8 +210,220 @@
                 letter-spacing: 0.5px;
             }
         }
+
+        /* Filter Control Bar */
+        .filters-control-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            background: rgba(44, 36, 30, 0.45);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+        }
+
+        .filter-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .filter-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            height: 45px;
+        }
+
+        .filter-toggle-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .filter-toggle-btn i,
+        .filter-toggle-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .active-filters-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background: var(--accent-primary);
+            color: var(--text-dark);
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        /* Filter Drawer (Popup Sidebar) */
+        .filter-drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .filter-drawer-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .filter-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            max-width: 100%;
+            height: 100%;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            z-index: 2001;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .filter-drawer.show {
+            right: 0;
+        }
+
+        .filter-drawer-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-drawer-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--accent-primary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .close-filter-drawer {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            transition: all var(--transition-fast);
+        }
+
+        .close-filter-drawer:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .filter-drawer-content {
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .drawer-filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .drawer-filter-title {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .category-filters,
+        .material-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-drawer-footer {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            gap: 1rem;
+            background: var(--bg-primary);
+        }
+
+        .filter-drawer-footer .btn {
+            flex: 1;
+            padding: 0.8rem;
+            text-align: center;
+            justify-content: center;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .filters-control-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .filter-actions {
+                width: 100%;
+                gap: 0.75rem;
+            }
+
+            .filter-toggle-btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .sort-box {
+                flex: 1;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <!-- Navbar -->
@@ -259,63 +473,47 @@
     <header class="page-header">
         <div class="container fade-in">
             <h1 class="page-title">The Collection</h1>
-            <p class="page-subtitle">Discover our exclusive range of meticulously crafted leather bags, designed for elegance and durability.</p>
+            <p class="page-subtitle">Discover our exclusive range of meticulously crafted leather bags, designed for
+                elegance and durability.</p>
         </div>
     </header>
 
     <!-- Filters and Search Section -->
     <section class="filters-section container fade-in">
-        <div class="filters-wrapper">
-            <!-- Search Box -->
+        <div class="filters-control-bar">
             <div class="search-box">
                 <i data-lucide="search"></i>
                 <input type="text" id="searchInput" placeholder="Search collection...">
             </div>
-            
-            <!-- Category Filter Row -->
-            <div class="category-filters">
-                <button class="filter-btn active" data-category="all">All</button>
-                <button class="filter-btn" data-category="backpack">Backpacks</button>
-                <button class="filter-btn" data-category="laptop bags">Laptop Bags</button>
-                <button class="filter-btn" data-category="ladies purse">Ladies Purses</button>
-                <button class="filter-btn" data-category="duffle & gym">Duffle & Gym</button>
-            </div>
-            
-            <!-- Sort Selector -->
-            <div class="sort-box">
-                <select id="sortSelect" aria-label="Sort products">
-                    <option value="default">Default Sorting</option>
-                    <option value="low-to-high">Price: Low to High</option>
-                    <option value="high-to-low">Price: High to Low</option>
-                </select>
+            <div class="filter-actions">
+                <button class="filter-toggle-btn" id="filterToggleBtn" aria-label="Open Filters">
+                    <i data-lucide="sliders"></i>
+                    <span>Filters</span>
+                    <span id="activeFiltersBadge" class="active-filters-badge" style="display: none;">0</span>
+                </button>
+                <div class="sort-box">
+                    <select id="sortSelect" aria-label="Sort products">
+                        <option value="default">Default Sorting</option>
+                        <option value="low-to-high">Price: Low to High</option>
+                        <option value="high-to-low">Price: High to Low</option>
+                    </select>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Shop Content -->
     <section class="shop-container container">
-        <div class="product-grid" id="productGrid">            
-            <!-- Product 1 -->
-            <div class="product-card fade-in" data-id="p1" data-title="Minimalist Daily Leather Backpack" data-price="3800" data-img="products/1.png">
-                <img src="products/1.png" alt="Minimalist Daily Leather Backpack" class="product-image">
-                <div class="product-info">
-                    <span class="product-category">Backpack</span>
-                    <h3 class="product-title">Minimalist Daily Leather Backpack</h3>
-                    <div class="product-price">₹3,800.00</div>
-                    <div class="product-actions">
-                        <a href="product-1.html" class="btn btn-outline">Info</a>
-                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
+        <div class="product-grid" id="productGrid">
             <!-- Product 2 -->
-            <div class="product-card fade-in" data-id="p2" data-title="Classic Croco-Embossed Laptop Briefcase" data-price="4500" data-img="products/2.png">
-                <img src="products/2.png" alt="Classic Croco-Embossed Laptop Briefcase" class="product-image">
+            <div class="product-card fade-in" data-id="p2" data-title="Profesional Multi zip Laptop Bag"
+                data-price="4000" data-category="laptop bag" data-material="leather"
+                data-features="multi-zip,professional" data-img="products/19.png">
+                <img src="products/19.png" alt="Profesional Multi zip Laptop Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Laptop Bags</span>
-                    <h3 class="product-title">Classic Croco-Embossed Laptop Briefcase</h3>
-                    <div class="product-price">₹4,500.00</div>
+                    <span class="product-category">Laptop Bag</span>
+                    <h3 class="product-title">Profesional Multi zip Laptop Bag</h3>
+                    <div class="product-price">₹4,000.00</div>
                     <div class="product-actions">
                         <a href="product-2.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -324,10 +522,12 @@
             </div>
 
             <!-- Product 3 -->
-            <div class="product-card fade-in" data-id="p3" data-title="Elegant Dual-Tone Croco Leather Tote" data-price="3200" data-img="products/3.png">
+            <div class="product-card fade-in" data-id="p3" data-title="Elegant Dual-Tone Croco Leather Tote"
+                data-price="3200" data-category="ladies bag" data-material="croco,leather"
+                data-features="double-portion" data-img="products/3.png">
                 <img src="products/3.png" alt="Elegant Dual-Tone Croco Leather Tote" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Ladies Purse</span>
+                    <span class="product-category">Ladies Bag</span>
                     <h3 class="product-title">Elegant Dual-Tone Croco Leather Tote</h3>
                     <div class="product-price">₹3,200.00</div>
                     <div class="product-actions">
@@ -338,12 +538,13 @@
             </div>
 
             <!-- Product 4 -->
-            <div class="product-card fade-in" data-id="p4" data-title="Compact Leather Crossbody Sling Bag" data-price="2200" data-img="products/4.png">
-                <img src="products/4.png" alt="Compact Leather Crossbody Sling Bag" class="product-image">
+            <div class="product-card fade-in" data-id="p4" data-title="Classsic 15 Laptop Bag" data-price="2000"
+                data-category="laptop bag" data-material="leather" data-features="classic" data-img="products/4.png">
+                <img src="products/4.png" alt="Classsic 15 Laptop Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Ladies Purse</span>
-                    <h3 class="product-title">Compact Leather Crossbody Sling Bag</h3>
-                    <div class="product-price">₹2,200.00</div>
+                    <span class="product-category">Laptop Bag</span>
+                    <h3 class="product-title">Classsic 15 Laptop Bag</h3>
+                    <div class="product-price">₹2,000.00</div>
                     <div class="product-actions">
                         <a href="product-4.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -352,12 +553,14 @@
             </div>
 
             <!-- Product 5 -->
-            <div class="product-card fade-in" data-id="p5" data-title="Executive Slim Leather Laptop Bag" data-price="4200" data-img="products/5.png">
-                <img src="products/5.png" alt="Executive Slim Leather Laptop Bag" class="product-image">
+            <div class="product-card fade-in" data-id="p5" data-title="Traditional Embossed 15 Laptop Bag"
+                data-price="2200" data-category="laptop bag" data-material="embossed" data-features="traditional"
+                data-img="products/5.png">
+                <img src="products/5.png" alt="Traditional Embossed 15 Laptop Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Laptop Bags</span>
-                    <h3 class="product-title">Executive Slim Leather Laptop Bag</h3>
-                    <div class="product-price">₹4,200.00</div>
+                    <span class="product-category">Laptop Bag</span>
+                    <h3 class="product-title">Traditional Embossed 15 Laptop Bag</h3>
+                    <div class="product-price">₹2,200.00</div>
                     <div class="product-actions">
                         <a href="product-5.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -366,10 +569,12 @@
             </div>
 
             <!-- Product 6 -->
-            <div class="product-card fade-in" data-id="p6" data-title="Multi-Compartment Textured Leather Clutch Wallet" data-price="1800" data-img="products/6.png">
+            <div class="product-card fade-in" data-id="p6" data-title="Multi-Compartment Textured Leather Clutch Wallet"
+                data-price="1800" data-category="ladies bag" data-material="leather" data-features="traditional"
+                data-img="products/6.png">
                 <img src="products/6.png" alt="Multi-Compartment Textured Leather Clutch Wallet" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Ladies Purse</span>
+                    <span class="product-category">Ladies Bag</span>
                     <h3 class="product-title">Multi-Compartment Textured Leather Clutch Wallet</h3>
                     <div class="product-price">₹1,800.00</div>
                     <div class="product-actions">
@@ -380,11 +585,13 @@
             </div>
 
             <!-- Product 7 -->
-            <div class="product-card fade-in" data-id="p7" data-title="Deep Forest Green Oiled Leather Messenger Bag" data-price="3900" data-img="products/7.png">
-                <img src="products/7.png" alt="Deep Forest Green Oiled Leather Messenger Bag" class="product-image">
+            <div class="product-card fade-in" data-id="p7" data-title="Special Classic Bone Ladies Bag"
+                data-price="3900" data-category="ladies bag" data-material="bone" data-features="classic"
+                data-img="products/7.png">
+                <img src="products/7.png" alt="Special Classic Bone Ladies Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Laptop Bags</span>
-                    <h3 class="product-title">Deep Forest Green Oiled Leather Messenger Bag</h3>
+                    <span class="product-category">Ladies Bag</span>
+                    <h3 class="product-title">Special Classic Bone Ladies Bag</h3>
                     <div class="product-price">₹3,900.00</div>
                     <div class="product-actions">
                         <a href="product-7.html" class="btn btn-outline">Info</a>
@@ -394,12 +601,14 @@
             </div>
 
             <!-- Product 8 -->
-            <div class="product-card fade-in" data-id="p8" data-title="Premium Croco-Embossed Top-Handle Satchel" data-price="3500" data-img="products/8.png">
-                <img src="products/8.png" alt="Premium Croco-Embossed Top-Handle Satchel" class="product-image">
+            <div class="product-card fade-in" data-id="p8" data-title="Bacchie Dholki Head Ladies Bag" data-price="1900"
+                data-category="ladies bag" data-material="leather" data-features="dholki-head"
+                data-img="products/8.png">
+                <img src="products/8.png" alt="Bacchie Dholki Head Ladies Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Ladies Purse</span>
-                    <h3 class="product-title">Premium Croco-Embossed Top-Handle Satchel</h3>
-                    <div class="product-price">₹3,500.00</div>
+                    <span class="product-category">Ladies Bag</span>
+                    <h3 class="product-title">Bacchie Dholki Head Ladies Bag</h3>
+                    <div class="product-price">₹1,900.00</div>
                     <div class="product-actions">
                         <a href="product-8.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -408,10 +617,12 @@
             </div>
 
             <!-- Product 9 -->
-            <div class="product-card fade-in" data-id="p9" data-title="Premium Laser-Cut Cylinder Crossbody Bag" data-price="3600" data-img="products/9.png">
+            <div class="product-card fade-in" data-id="p9" data-title="Premium Laser-Cut Cylinder Crossbody Bag"
+                data-price="3600" data-category="ladies bag" data-material="leather" data-features="classic"
+                data-img="products/9.png">
                 <img src="products/9.png" alt="Premium Laser-Cut Cylinder Crossbody Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Ladies Purse</span>
+                    <span class="product-category">Ladies Bag</span>
                     <h3 class="product-title">Premium Laser-Cut Cylinder Crossbody Bag</h3>
                     <div class="product-price">₹3,600.00</div>
                     <div class="product-actions">
@@ -422,12 +633,14 @@
             </div>
 
             <!-- Product 10 -->
-            <div class="product-card fade-in" data-id="p10" data-title="Modern Tailored Leather Zipper Tote" data-price="3400" data-img="products/10.png">
-                <img src="products/10.png" alt="Modern Tailored Leather Zipper Tote" class="product-image">
+            <div class="product-card fade-in" data-id="p10" data-title="11/9 Muttu Guitar Daily Use unisex Bag"
+                data-price="2100" data-category="unisex bags" data-material="leather" data-features="muttu-guitar"
+                data-img="products/10.png">
+                <img src="products/10.png" alt="11/9 Muttu Guitar Daily Use unisex Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Ladies Purse</span>
-                    <h3 class="product-title">Modern Tailored Leather Zipper Tote</h3>
-                    <div class="product-price">₹3,400.00</div>
+                    <span class="product-category">Unisex Bags</span>
+                    <h3 class="product-title">11/9 Muttu Guitar Daily Use unisex Bag</h3>
+                    <div class="product-price">₹2,100.00</div>
                     <div class="product-actions">
                         <a href="product-10.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -436,12 +649,14 @@
             </div>
 
             <!-- Product 11 -->
-            <div class="product-card fade-in" data-id="p11" data-title="Premium Slate Blue Distressed Leather Messenger Bag" data-price="4000" data-img="products/11.png">
-                <img src="products/11.png" alt="Premium Slate Blue Distressed Leather Messenger Bag" class="product-image">
+            <div class="product-card fade-in" data-id="p11" data-title="Special Wodden Handle ladies bag"
+                data-price="3800" data-category="ladies bag" data-material="wooden" data-features="wooden-handle"
+                data-img="products/11.png">
+                <img src="products/11.png" alt="Special Wodden Handle ladies bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Laptop Bags</span>
-                    <h3 class="product-title">Premium Slate Blue Distressed Leather Messenger Bag</h3>
-                    <div class="product-price">₹4,000.00</div>
+                    <span class="product-category">Ladies Bag</span>
+                    <h3 class="product-title">Special Wodden Handle ladies bag</h3>
+                    <div class="product-price">₹3,800.00</div>
                     <div class="product-actions">
                         <a href="product-11.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -450,12 +665,13 @@
             </div>
 
             <!-- Product 12 -->
-            <div class="product-card fade-in" data-id="p12" data-title="Rugged Multi-Pocket Distressed Leather Backpack" data-price="4200" data-img="products/12.png">
-                <img src="products/12.png" alt="Rugged Multi-Pocket Distressed Leather Backpack" class="product-image">
+            <div class="product-card fade-in" data-id="p12" data-title="Medium 16 Buff Travelers Bag" data-price="3200"
+                data-category="traveler bag" data-material="buff" data-features="classic" data-img="products/12.png">
+                <img src="products/12.png" alt="Medium 16 Buff Travelers Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Backpack</span>
-                    <h3 class="product-title">Rugged Multi-Pocket Distressed Leather Backpack</h3>
-                    <div class="product-price">₹4,200.00</div>
+                    <span class="product-category">Traveler Bag</span>
+                    <h3 class="product-title">Medium 16 Buff Travelers Bag</h3>
+                    <div class="product-price">₹3,200.00</div>
                     <div class="product-actions">
                         <a href="product-12.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -464,12 +680,14 @@
             </div>
 
             <!-- Product 13 -->
-            <div class="product-card fade-in" data-id="p13" data-title="Artisan Laser-Tooled Leather Briefcase Messenger" data-price="4600" data-img="products/13.png">
-                <img src="products/13.png" alt="Artisan Laser-Tooled Leather Briefcase Messenger" class="product-image">
+            <div class="product-card fade-in" data-id="p13" data-title="Double face backside traditional ladies bag"
+                data-price="2500" data-category="ladies bag" data-material="leather"
+                data-features="double-face,traditional" data-img="products/13.png">
+                <img src="products/13.png" alt="Double face backside traditional ladies bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Laptop Bags</span>
-                    <h3 class="product-title">Artisan Laser-Tooled Leather Briefcase Messenger</h3>
-                    <div class="product-price">₹4,600.00</div>
+                    <span class="product-category">Ladies Bag</span>
+                    <h3 class="product-title">Double face backside traditional ladies bag</h3>
+                    <div class="product-price">₹2,500.00</div>
                     <div class="product-actions">
                         <a href="product-13.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -478,12 +696,14 @@
             </div>
 
             <!-- Product 14 -->
-            <div class="product-card fade-in" data-id="p14" data-title="Handcrafted Olive Green Croco-Accent Satchel" data-price="3800" data-img="products/14.png">
-                <img src="products/14.png" alt="Handcrafted Olive Green Croco-Accent Satchel" class="product-image">
+            <div class="product-card fade-in" data-id="p14" data-title="9/7 Muttu Guitar Daily use unisex Bag"
+                data-price="1900" data-category="unisex bags" data-material="leather" data-features="muttu-guitar"
+                data-img="products/14.png">
+                <img src="products/14.png" alt="9/7 Muttu Guitar Daily use unisex Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Ladies Purse</span>
-                    <h3 class="product-title">Handcrafted Olive Green Croco-Accent Satchel</h3>
-                    <div class="product-price">₹3,800.00</div>
+                    <span class="product-category">Unisex Bags</span>
+                    <h3 class="product-title">9/7 Muttu Guitar Daily use unisex Bag</h3>
+                    <div class="product-price">₹1,900.00</div>
                     <div class="product-actions">
                         <a href="product-14.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -492,12 +712,14 @@
             </div>
 
             <!-- Product 15 -->
-            <div class="product-card fade-in" data-id="p15" data-title="Classic Grained Leather Dome Backpack" data-price="3600" data-img="products/15.png">
-                <img src="products/15.png" alt="Classic Grained Leather Dome Backpack" class="product-image">
+            <div class="product-card fade-in" data-id="p15" data-title="Pittu 7 pocket Travelers bag" data-price="5000"
+                data-category="traveler bag" data-material="leather" data-features="pittu,7-pocket"
+                data-img="products/15.png">
+                <img src="products/15.png" alt="Pittu 7 pocket Travelers bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Backpack</span>
-                    <h3 class="product-title">Classic Grained Leather Dome Backpack</h3>
-                    <div class="product-price">₹3,600.00</div>
+                    <span class="product-category">Traveler Bag</span>
+                    <h3 class="product-title">Pittu 7 pocket Travelers bag</h3>
+                    <div class="product-price">₹5,000.00</div>
                     <div class="product-actions">
                         <a href="product-15.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -506,12 +728,14 @@
             </div>
 
             <!-- Product 16 -->
-            <div class="product-card fade-in" data-id="p16" data-title="Executive Croco-Patterned Leather Briefcase" data-price="4800" data-img="products/16.png">
-                <img src="products/16.png" alt="Executive Croco-Patterned Leather Briefcase" class="product-image">
+            <div class="product-card fade-in" data-id="p16" data-title="Clock Novel 11/9 Classic Unisex daily use Bag"
+                data-price="2200" data-category="unisex bags" data-material="leather"
+                data-features="clock-novel,classic" data-img="products/16.png">
+                <img src="products/16.png" alt="Clock Novel 11/9 Classic Unisex daily use Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Laptop Bags</span>
-                    <h3 class="product-title">Executive Croco-Patterned Leather Briefcase</h3>
-                    <div class="product-price">₹4,800.00</div>
+                    <span class="product-category">Unisex Bags</span>
+                    <h3 class="product-title">Clock Novel 11/9 Classic Unisex daily use Bag</h3>
+                    <div class="product-price">₹2,200.00</div>
                     <div class="product-actions">
                         <a href="product-16.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -520,12 +744,13 @@
             </div>
 
             <!-- Product 17 -->
-            <div class="product-card fade-in" data-id="p17" data-title="The &quot;Chronicle&quot; Distressed Leather Drawstring Backpack" data-price="3900" data-img="products/17.png">
-                <img src="products/17.png" alt="The "Chronicle" Distressed Leather Drawstring Backpack" class="product-image">
+            <div class="product-card fade-in" data-id="p17" data-title="Special Key lock Ladies Bag" data-price="4000"
+                data-category="ladies bag" data-material="leather" data-features="key-lock" data-img="products/17.png">
+                <img src="products/17.png" alt="Special Key lock Ladies Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Backpack</span>
-                    <h3 class="product-title">The "Chronicle" Distressed Leather Drawstring Backpack</h3>
-                    <div class="product-price">₹3,900.00</div>
+                    <span class="product-category">Ladies Bag</span>
+                    <h3 class="product-title">Special Key lock Ladies Bag</h3>
+                    <div class="product-price">₹4,000.00</div>
                     <div class="product-actions">
                         <a href="product-17.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -534,12 +759,14 @@
             </div>
 
             <!-- Product 18 -->
-            <div class="product-card fade-in" data-id="p18" data-title="The &quot;Pebbled Luna&quot; Wooden-Handle Crescent Tote" data-price="3500" data-img="products/18.png">
-                <img src="products/18.png" alt="The "Pebbled Luna" Wooden-Handle Crescent Tote" class="product-image">
+            <div class="product-card fade-in" data-id="p18" data-title="11/9 Alpha Cut unisex Travel Bag"
+                data-price="2200" data-category="unisex bags" data-material="leather" data-features="alpha-cut"
+                data-img="products/18.png">
+                <img src="products/18.png" alt="11/9 Alpha Cut unisex Travel Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Ladies Purse</span>
-                    <h3 class="product-title">The "Pebbled Luna" Wooden-Handle Crescent Tote</h3>
-                    <div class="product-price">₹3,500.00</div>
+                    <span class="product-category">Unisex Bags</span>
+                    <h3 class="product-title">11/9 Alpha Cut unisex Travel Bag</h3>
+                    <div class="product-price">₹2,200.00</div>
                     <div class="product-actions">
                         <a href="product-18.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -547,27 +774,15 @@
                 </div>
             </div>
 
-            <!-- Product 19 -->
-            <div class="product-card fade-in" data-id="p19" data-title="Premium Honey Tan Leather Travel Duffle Bag" data-price="5200" data-img="products/19.png">
-                <img src="products/19.png" alt="Premium Honey Tan Leather Travel Duffle Bag" class="product-image">
-                <div class="product-info">
-                    <span class="product-category">Duffle & Gym</span>
-                    <h3 class="product-title">Premium Honey Tan Leather Travel Duffle Bag</h3>
-                    <div class="product-price">₹5,200.00</div>
-                    <div class="product-actions">
-                        <a href="product-19.html" class="btn btn-outline">Info</a>
-                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
             <!-- Product 20 -->
-            <div class="product-card fade-in" data-id="p20" data-title="Handcrafted Triple-Gusset Croco Crossbody Bag" data-price="2800" data-img="products/20.png">
-                <img src="products/20.png" alt="Handcrafted Triple-Gusset Croco Crossbody Bag" class="product-image">
+            <div class="product-card fade-in" data-id="p20" data-title="Medium 14 youth Pittu travelers Bag"
+                data-price="3000" data-category="traveler bag" data-material="leather" data-features="pittu"
+                data-img="products/20.png">
+                <img src="products/20.png" alt="Medium 14 youth Pittu travelers Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Ladies Purse</span>
-                    <h3 class="product-title">Handcrafted Triple-Gusset Croco Crossbody Bag</h3>
-                    <div class="product-price">₹2,800.00</div>
+                    <span class="product-category">Traveler Bag</span>
+                    <h3 class="product-title">Medium 14 youth Pittu travelers Bag</h3>
+                    <div class="product-price">₹3,000.00</div>
                     <div class="product-actions">
                         <a href="product-20.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -576,12 +791,14 @@
             </div>
 
             <!-- Product 21 -->
-            <div class="product-card fade-in" data-id="p21" data-title="Vintage Green Full-Grain Oiled Leather Backpack" data-price="4400" data-img="products/21.png">
-                <img src="products/21.png" alt="Vintage Green Full-Grain Oiled Leather Backpack" class="product-image">
+            <div class="product-card fade-in" data-id="p21" data-title="Double portion Sleeker Unisex daily routine bag"
+                data-price="1900" data-category="unisex bags" data-material="leather" data-features="double-portion"
+                data-img="products/21.png">
+                <img src="products/21.png" alt="Double portion Sleeker Unisex daily routine bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Backpack</span>
-                    <h3 class="product-title">Vintage Green Full-Grain Oiled Leather Backpack</h3>
-                    <div class="product-price">₹4,400.00</div>
+                    <span class="product-category">Unisex Bags</span>
+                    <h3 class="product-title">Double portion Sleeker Unisex daily routine bag</h3>
+                    <div class="product-price">₹1,900.00</div>
                     <div class="product-actions">
                         <a href="product-21.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
@@ -590,19 +807,21 @@
             </div>
 
             <!-- Product 22 -->
-            <div class="product-card fade-in" data-id="p22" data-title="Asymmetrical Croco-Embossed Leather Messenger Bag" data-price="3200" data-img="products/22.png">
-                <img src="products/22.png" alt="Asymmetrical Croco-Embossed Leather Messenger Bag" class="product-image">
+            <div class="product-card fade-in" data-id="p22" data-title="Big Pittu Classic Travelers Bag"
+                data-price="4800" data-category="traveler bag" data-material="leather" data-features="pittu,classic"
+                data-img="products/22.png">
+                <img src="products/22.png" alt="Big Pittu Classic Travelers Bag" class="product-image">
                 <div class="product-info">
-                    <span class="product-category">Laptop Bags</span>
-                    <h3 class="product-title">Asymmetrical Croco-Embossed Leather Messenger Bag</h3>
-                    <div class="product-price">₹3,200.00</div>
+                    <span class="product-category">Traveler Bag</span>
+                    <h3 class="product-title">Big Pittu Classic Travelers Bag</h3>
+                    <div class="product-price">₹4,800.00</div>
                     <div class="product-actions">
                         <a href="product-22.html" class="btn btn-outline">Info</a>
                         <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
                     </div>
                 </div>
             </div>
-</div>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -611,7 +830,8 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>Caracal Bharat</h3>
-                    <p>Manufacturer, trader, and exporter of premium leather goods. Elevating everyday carry with unmatched craftsmanship.</p>
+                    <p>Manufacturer, trader, and exporter of premium leather goods. Elevating everyday carry with
+                        unmatched craftsmanship.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
@@ -623,8 +843,9 @@
                 </div>
                 <div class="footer-contact">
                     <h4>Get In Touch</h4>
-                    <p><i data-lucide="map-pin"></i> Takshal Enterprises, 2nd floor, Octroi post, Fatehpura- Bedla Road, Udaipur-313001</p>
-                    <p><i data-lucide="phone"></i> +91 89491 92672</p>
+                    <p><i data-lucide="map-pin"></i> Takshal Enterprises, 2nd floor, Octroi post, Fatehpura- Bedla Road,
+                        Udaipur-313001</p>
+                    <p><i data-lucide="phone"></i> +91 88540 65069</p>
                     <p><i data-lucide="mail"></i> info@caracalbharat.com</p>
                 </div>
             </div>
@@ -634,8 +855,51 @@
         </div>
     </footer>
 
+    <!-- Filter Drawer -->
+    <div class="filter-drawer-overlay" id="filterDrawerOverlay"></div>
+    <div class="filter-drawer" id="filterDrawer">
+        <div class="filter-drawer-header">
+            <h3>Filters</h3>
+            <button class="close-filter-drawer" id="closeFilterDrawerBtn" aria-label="Close Filters">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="filter-drawer-content">
+            <!-- Category Filter Group -->
+            <div class="drawer-filter-group">
+                <h4 class="drawer-filter-title">Category</h4>
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">All Categories</button>
+                    <button class="filter-btn" data-category="ladies bag">Ladies Bag</button>
+                    <button class="filter-btn" data-category="unisex bags">Unisex Bags</button>
+                    <button class="filter-btn" data-category="traveler bag">Traveler Bag</button>
+                    <button class="filter-btn" data-category="laptop bag">Laptop Bag</button>
+                </div>
+            </div>
+
+            <!-- Material Filter Group -->
+            <div class="drawer-filter-group">
+                <h4 class="drawer-filter-title">Material</h4>
+                <div class="material-filters">
+                    <button class="filter-btn active" data-material="all">All Materials</button>
+                    <button class="filter-btn" data-material="leather">Leather</button>
+                    <button class="filter-btn" data-material="croco">Croco</button>
+                    <button class="filter-btn" data-material="bone">Bone</button>
+                    <button class="filter-btn" data-material="wooden">Wooden Handle</button>
+                    <button class="filter-btn" data-material="buff">Buff</button>
+                    <button class="filter-btn" data-material="embossed">Embossed</button>
+                </div>
+            </div>
+        </div>
+        <div class="filter-drawer-footer">
+            <button class="btn btn-outline" id="clearAllFiltersBtn">Clear All</button>
+            <button class="btn btn-primary" id="applyFiltersBtn">Apply</button>
+        </div>
+    </div>
+
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/918949192672" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <a href="https://wa.me/918854065069" class="floating-whatsapp" target="_blank" rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp">
         <i data-lucide="message-circle"></i>
     </a>
 
@@ -644,4 +908,5 @@
         lucide.createIcons();
     </script>
 </body>
+
 </html>

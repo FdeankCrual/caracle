@@ -67,14 +67,23 @@
 
             <!-- Product Container -->
             <div class="product-detail-container fade-in" data-id="p3" data-title="Elegant Dual-Tone Croco Leather Tote" data-price="3200" data-img="products/3.png">
-                <!-- Left: Image -->
+                <!-- Left: Image Gallery -->
                 <div class="product-detail-image-wrapper">
-                    <img src="products/3.png" alt="Elegant Dual-Tone Croco Leather Tote" class="product-detail-image">
+                    <div class="product-gallery">
+                        <div class="product-image-slider">
+                            <img src="products/3.png" alt="Elegant Dual-Tone Croco Leather Tote" class="product-detail-image active" id="mainProductImage">
+                            <button class="slider-btn prev-btn" id="prevSlideBtn" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+                            <button class="slider-btn next-btn" id="nextSlideBtn" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+                        </div>
+                        <div class="product-thumbnails">
+                            <img src="products/3.png" alt="Elegant Dual-Tone Croco Leather Tote - View 1" class="thumbnail-img active" data-index="0">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Right: Content -->
                 <div class="product-detail-info">
-                    <span class="product-detail-category">Ladies Purse</span>
+                    <span class="product-detail-category">Ladies Bag</span>
                     <h1 class="product-detail-title">Elegant Dual-Tone Croco Leather Tote</h1>
                     <div class="product-detail-price">₹3,200</div>
                     
